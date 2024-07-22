@@ -76,10 +76,9 @@ def setup_swagger(
     routes[:0] = [
         tornado.web.url(_swagger_ui_url, SwaggerUiHandler),
         tornado.web.url("{}/".format(_base_swagger_ui_url), SwaggerUiHandler),
-        tornado.web.url(_swagger_spec_url, SwaggerSpecHandler),
+        tornado.web.url(_swagger_spec_url, SwaggerSpecHandler, dict(swagger_schema=swagger_schema)),
     ]
 
-    SwaggerSpecHandler.SWAGGER_SPEC = swagger_schema
     SwaggerSpecHandler.allow_cors = allow_cors
     SwaggerUiHandler.allow_cors = allow_cors
 

@@ -22,11 +22,13 @@ class SwaggerUiHandler(TornadoBaseHandler):
 
 
 class SwaggerSpecHandler(TornadoBaseHandler):
-    SWAGGER_SPEC = ""
     allow_cors: bool = False
 
+    def initialize(self, swagger_schema):
+        self.swagger_schema = swagger_schema
+
     def get(self):
-        self.write(self.SWAGGER_SPEC)
+        self.write(self.swagger_schema)
         
     def options(self):
         if self.allow_cors:
